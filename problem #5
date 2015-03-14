@@ -1,0 +1,45 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #4                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+int gcd(long long int num1,long long int num2)
+{
+    long long int num3;
+
+    // here I look for that number i that that divides evenly into my two numbers, which is the gcg
+    for(long long int i=1; i<=num2; ++i)
+    {
+        if(num1%i==0 && num2%i==0)
+            num3=i;
+    }
+
+    return num3;
+}
+
+int main()
+{
+    long long int num=20;        // upper bound
+    long long int lcm=2;         // since I start with i=3, I already know the lcm between 1 and 2: 2; note that I use lcm here as an accumulator as well;
+
+    // I compute the lcm two numbers at a time and use lcm as an accumulator as well
+    for(long long int i=3; i<=num; ++i)
+    {
+        // here I use the property that the lcm of two numbers a and b is ((a*b)/gcd(a,b))
+        lcm=(lcm*i)/gcd(lcm,i);
+    }
+
+    cout << "The LCM of all the numbers between 2 and " << num << " is " << lcm << endl;
+
+    return 0;
+}
