@@ -1,0 +1,63 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #6                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <cmath>
+
+using namespace std;
+
+int length(unsigned long long int);  // function prototype
+
+int main()
+{
+
+    int longest = 0;                       // longest chain
+    int starting_num = 0;                  // will hold starting number with longest chain
+
+    for(int n = 1; n < 1000000; ++n)
+    {
+        if (length(n) >= longest)       // condition that will terminate the loop
+        {
+            longest = length(n);
+            starting_num = n;
+        }
+    }
+
+    cout << "The length of " << starting_num << " is " << longest << endl;
+
+    return 0;
+}
+
+
+// function definition
+int length(unsigned long long int m)
+{
+    int it = 1;     // iterator that will keep track of the length
+
+    while (m != 1)  // base case when the loop will stop: the division yelds a 1
+    {
+        if (m % 2 == 0)     // even case
+        {
+            m = m / 2;
+
+            ++it;
+        }
+        else                // odd case
+        {
+            m = 3*m + 1;
+
+            ++it;
+        }
+    }
+    return it;
+}
