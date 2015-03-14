@@ -1,0 +1,87 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #3                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+// function definitions
+
+// my square root function
+
+int sqrt(long long int num)
+{
+    double sqr = num/2;
+
+    for (int i = 0; i < 25; i++)
+    {
+       sqr = ( sqr + num/sqr )/2;
+    }
+
+    return sqr;
+}
+
+// prime number check
+
+bool is_prime(long long int fact)
+{
+    bool prime = true;
+
+    // I round off the the square root to the smallest integer number
+
+    long long int sqrt_of_fact=sqrt(fact);       // square root function call so it is only computed once and assigned to sqrt_of_num
+
+    for(int k = 2; k <= sqrt_of_fact; ++k)
+    {
+        if(fact % k == 0)
+            prime = false;
+    }
+
+    return prime;
+}
+
+
+
+int main()
+{
+
+    int prime_fact = 0;
+
+    long long int num = 600851475143;       // number whose greatest prime factor we want to find
+
+
+    if(is_prime(num))       // tests the original number for primeness: if non-prime, only a cout statement is executed
+    {
+        cout << num << " is a prime number." << endl;
+    }
+    else
+    {
+        int sqrt_of_num=sqrt(num);    // square root function call so it is only computed once and assigned to sqrt_of_num
+
+        // this only works for big numbers, it won't work if the # is 15 or 20 or similar numbers
+        // because sqrt(15)= 3.87 which is smaller than 5, so 5 will be discarded
+
+        for(int i = sqrt_of_num; i >= 2; --i)       // checks all the #s from 2 to the square root of the original #
+        {
+            if(num % i == 0 && is_prime(i))        // if my number is evenly divisible by i and i is a prime factor (TRUE, TRUE)
+            {
+                prime_fact = i;
+
+                break;
+            }
+        }
+
+        cout << "The greatest prime factor of " << num << " is "  << prime_fact << endl;
+    }
+
+
+    return 0;
+}
