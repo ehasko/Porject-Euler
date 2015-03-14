@@ -1,0 +1,84 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #5                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+const int arr_size = 3000;  // size of the array that will store the palindromes
+
+int pal[arr_size];          // array that will store the palindromes
+
+int k=0;        // global array indexer
+
+int l=1;        // global palindrome counter
+
+void pal_check(int);    // function prototype
+
+int main()
+{
+
+    int n1, n2, num;
+
+    for (n1 = 999; n1 >= 1; --n1)
+    {
+        for(n2 = 999; n2 >= 1; --n2)
+        {
+            num = n1 * n2;
+
+            pal_check(num);
+        }
+    }
+
+
+    // the following finds the greatest palindrome among those stored in the pal array
+    int greatest_pal = pal[0];
+
+    for(int i = 1; i < arr_size; ++i)
+    {
+        if ( greatest_pal < pal[i] )
+            greatest_pal = pal[i];
+    }
+
+    cout << "The greatest palindrome is " << greatest_pal << endl;
+
+    return 0;
+}
+
+// function definition: here I only contemplated the case where there would be a palindrome
+// of 6 digits coming from the product of 2 3 digit numbers;
+void pal_check(int num1)
+{
+    // the following retrieves all the digits from a number
+    int d1 = 0, d2 = 0, d3 = 0, d4 = 0, d5 = 0, d6 = 0;
+
+    d1 = (( num1 / 100000 ) % 10 );
+
+    d2 = (( num1 / 10000 ) % 10 );
+
+    d3 = (( num1 / 1000 ) % 10 );
+
+    d4 = (( num1 / 100 ) % 10 );
+
+    d5 = (( num1 / 10 ) % 10 );
+
+    d6 = ( num1 % 10 );
+
+    // if I have a palindrome...
+    if ( d1 == d6 && d2 == d5 && d3 == d4)
+    {
+        pal[k] = num1;  // save palindrome in the array
+        ++k;    // increment array indexer
+        ++l;    // increment palindrome counter
+    }
+
+
+}
