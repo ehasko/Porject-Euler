@@ -1,0 +1,48 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #2                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+    int range = 4000000;    // upper limit for computing Fibonacci #s
+
+    int pre = 0;        // previous term of the Fibonacci sequence
+    int post = 1;       // next term of the Fibonacci sequence
+    int fib_num = 0;    // current Fibonacci #
+    int sum=0;
+
+    int i=0;            // loop variable
+
+    while(fib_num < range)
+    {
+        // how each term is computed
+        fib_num = pre + post;
+
+        pre = post;
+
+        post = fib_num;
+
+        if(fib_num % 2 == 0)    // only the even Fibonacci numbers are added
+            sum+= fib_num;
+
+        ++i;
+
+    }
+
+    cout << "The sum of the even Fibonacci #s below " << range << " is " << sum << endl;
+
+
+    return 0;
+}
