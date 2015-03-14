@@ -1,0 +1,68 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #1                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int num=1000;
+    int acc_mul_3=0;
+    int acc_mul_5=0;
+    int acc_mul_15=0;
+    int sum=0;
+    int i;                  //counter of # of multiples
+
+    // sum of multiples of 3
+    for(i = 0; 3*i < num; i++)
+    {
+        acc_mul_3+= 3*i;
+
+        if(3*i > num)           //  exit mechanism for the loop
+            break;
+    }
+
+    // cout << "Sum of multiples of 3 less than 10,020: " << acc_mul_3 << endl;    // DEBUGGING
+    // cout << "# of multiples: " << i-1 << endl;                                  // DEBUGGING
+
+    // sum of multiples of 5
+    for(i = 0; 5*i < num; i++)
+    {
+        acc_mul_5+= 5*i;
+
+        if(5*i > num)
+            break;
+    }
+
+    // cout << "Sum of multiples of 5 less than 10,020: " << acc_mul_5 << endl;    // DEBUGGING
+
+
+    // sum multiples of 3*5=15
+    for(i = 0; 15*i < num; i++)
+    {
+        acc_mul_15+= 15*i;
+
+        if(15*i > num)
+            break;
+    }
+
+    // cout << "Sum of multiples of 15 less than 10,020: " << acc_mul_15 << endl;    // DEBUGGING
+
+    // since the multiples of 3*5 will come from both 3 and 5, I need to remove them from the sum
+
+    sum = acc_mul_3 + acc_mul_5 - acc_mul_15;
+
+    cout << "The sum of the multiples of 3 and 5 below " << num << " is: " << sum << endl;
+
+    return 0;
+}
+
