@@ -1,0 +1,89 @@
+////////////////////////////////////
+//Enkeleid Hasko                  //
+//Project #7                      //
+//Discrete Math - MAT 231.3232    //
+//Dec. 15, 2014                   //
+//ehasko@gmail.com                //
+//(347) 772-6987                  //
+//Compiled with Codeblocks v13.12 //
+//on Windows 7 x64 SP1            //
+////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+
+// square root function
+double sqrt(int num)
+{
+        double sqr = num/2;
+
+        for (int i = 0; i < 25; i++)
+           sqr = ( sqr + num/sqr )/2;
+
+        return sqr;
+}
+
+
+// this function returns true iff the # it is given is a prime #
+bool is_prime(int fact)
+{
+    bool prime = true;
+
+    // I round off the the square root to the smallest integer number
+
+    int sqrt_of_fact=sqrt(fact);       // square root function call so it is only computed once and assigned to sqrt_of_num
+
+    for(int k = 2; k <= sqrt_of_fact /*&& sqrt_of_fact > 5*/; ++k)
+    {
+        if(fact % k == 0)
+            prime = false;
+    }
+
+    return prime;
+}
+
+
+int main()
+{
+    int fails[2];  // will store the first two numbers that will fail the test
+
+    int p = 0;  // array indexer
+
+    int i;      // stores the odd composite numbers
+
+    int range = 1000000;
+
+//this generates odd composite numbers
+    for ( i = 3; i < range; ++i)           // I scan all numbers from 3 to the range
+    {
+        if (!is_prime(i) && i % 2 != 0)    // g odd enerate composite #s only: I filter out prime #s and even #s
+        {
+            // here I use the fact that from i = 2(n)^2 + k, since k has to be prime, if the difference i - 2(n)^2
+            // doesn't yeld a prime then i cannot be expressed as the sum of a prime and twice the square of an int
+            int n = 1;
+
+            while (!is_prime(i - 2*n*n))
+            {
+                ++n;
+
+                // if twice the square becomes bigger than the odd composite number
+                // then there are no primes coming from i - 2n^2
+
+                if((i - 2*n*n) < 0)
+                {
+                    fails[p] = i;
+
+                    ++p;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    cout << "The first two numbers to fail the test are: " << endl << fails[0] << endl << fails[1] << endl;
+
+    return 0;
+}
